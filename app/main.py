@@ -2,7 +2,7 @@ from fastapi import FastAPI, File, UploadFile
 import os
 import sys
 sys.path.insert(1, os.path.abspath("app"))
-from ocr import test
+from ocr import read_image
 
 
 app = FastAPI()
@@ -33,7 +33,7 @@ async def upload_to_orc(file: UploadFile = File(...)):
 
     # send image to OCR Process
     # result = await read_image(file_path)
-    result = await test(file_path)
+    result = await read_image(file_path)
 
     print(result)
 
