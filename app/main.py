@@ -3,10 +3,25 @@ import os
 import sys
 sys.path.insert(1, os.path.abspath("app"))
 from ocr import read_image
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
 
+origins = [
+    "http://psu-e-dorm.vercel.app",
+    "https://psu-e-dorm.vercel.app",
+    "http://localhost",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get('/')
 async def server_status():
